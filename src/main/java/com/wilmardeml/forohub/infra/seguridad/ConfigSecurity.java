@@ -32,7 +32,8 @@ public class ConfigSecurity {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req ->
-                    req.requestMatchers(HttpMethod.POST, "login").permitAll().anyRequest().authenticated()
+                    req.requestMatchers(HttpMethod.POST, "login", "usuarios").permitAll()
+                            .anyRequest().authenticated()
                 );
 
         return http.build();
