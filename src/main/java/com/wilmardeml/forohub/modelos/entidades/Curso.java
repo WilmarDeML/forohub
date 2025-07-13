@@ -1,9 +1,12 @@
 package com.wilmardeml.forohub.modelos.entidades;
 
+import com.wilmardeml.forohub.modelos.dtos.DatosRegistroCurso;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -15,4 +18,9 @@ public class Curso {
 
     private String nombre;
     private String categoria;
+
+    public Curso(DatosRegistroCurso datos) {
+        nombre = datos.nombre();
+        categoria = datos.categoria();
+    }
 }
