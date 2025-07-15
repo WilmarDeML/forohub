@@ -59,4 +59,13 @@ public class TopicoController {
         return ResponseEntity.ok(topicoService.detallarPorId(id));
     }
 
+    @Transactional
+    @PutMapping("{id}")
+    public ResponseEntity<DatosDetalleTopico> actualizar(@RequestBody @Valid DatosRegistroTopico topico,
+                                                         @PathVariable Long id) {
+
+        var topicoActualizado = topicoService.actualizar(id, topico);
+        return ResponseEntity.ok(new DatosDetalleTopico(topicoActualizado));
+    }
+
 }

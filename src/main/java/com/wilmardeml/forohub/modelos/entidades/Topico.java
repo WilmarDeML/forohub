@@ -1,5 +1,6 @@
 package com.wilmardeml.forohub.modelos.entidades;
 
+import com.wilmardeml.forohub.modelos.dtos.DatosRegistroTopico;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,4 +37,10 @@ public class Topico {
     @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL)
     private List<Respuesta> respuestas;
 
+    public void actualizar(DatosRegistroTopico topico, Usuario autor, Curso curso) {
+        titulo = topico.titulo();
+        mensaje = topico.mensaje();
+        this.autor = autor;
+        this.curso = curso;
+    }
 }
