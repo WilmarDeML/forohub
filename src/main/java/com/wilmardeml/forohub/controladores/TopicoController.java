@@ -53,4 +53,10 @@ public class TopicoController {
         return ResponseEntity.ok(topicoService.listarTopicosPorNombreCurso(nombreCurso, paginacion));
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<DatosTopico> detallar(@PathVariable Long id) {
+
+        return ResponseEntity.ok(topicoService.detallarPorId(id));
+    }
+
 }

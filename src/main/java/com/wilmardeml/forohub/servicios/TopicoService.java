@@ -52,4 +52,8 @@ public class TopicoService {
     public Page<DatosTopico> listarTopicosPorNombreCurso(String nombreCurso, Pageable paginacion) {
         return topicoRepository.findByCursoNombre(nombreCurso, paginacion).map(DatosTopico::new);
     }
+
+    public DatosTopico detallarPorId(Long idTopico) {
+        return new DatosTopico(topicoRepository.getReferenceById(idTopico));
+    }
 }
