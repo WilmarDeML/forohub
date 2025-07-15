@@ -54,13 +54,22 @@ public class TopicoService {
     }
 
     public Topico actualizar(Long id, DatosRegistroTopico topico) {
-        var topicoBuscado = topicoRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("El tópico no existe"));
+        var topicoBuscado = obtenerTopicoSiExiste(id);
         validarTituloMensaje(topico);
         var autor = obtenerAutorSiExiste(topico);
         var curso = obtenerCursoSiExiste(topico);
         topicoBuscado.actualizar(topico, autor, curso);
         return topicoBuscado;
+    }
+
+    public void eliminar(Long id) {
+        var topicoBuscado = obtenerTopicoSiExiste(id);
+        topicoRepository.deleteById(topicoBuscado.getId());
+    }
+
+    private Topico obtenerTopicoSiExiste(Long id) {
+        return topicoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("El tópico no existe"));
     }
 
     private Usuario obtenerAutorSiExiste(DatosRegistroTopico topico) {
