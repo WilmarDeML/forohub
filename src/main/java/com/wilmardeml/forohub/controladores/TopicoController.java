@@ -2,15 +2,16 @@ package com.wilmardeml.forohub.controladores;
 
 import com.wilmardeml.forohub.modelos.dtos.DatosDetalleTopico;
 import com.wilmardeml.forohub.modelos.dtos.DatosRegistroTopico;
+import com.wilmardeml.forohub.modelos.dtos.DatosTopico;
 import com.wilmardeml.forohub.servicios.TopicoService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -35,6 +36,21 @@ public class TopicoController {
                 .toUri();
 
         return ResponseEntity.created(location).body(detalleTopico);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<DatosTopico>> listar(@PageableDefault(size = 10, sort = "fechaCreacion")
+                                                        Pageable paginacion) {
+
+        return ResponseEntity.ok(topicoService.listarTopicos(paginacion));
+    }
+
+    @GetMapping("curso/{nombreCurso}")
+    public ResponseEntity<Page<DatosTopico>> listarPorNombreCurso(@PathVariable String nombreCurso,
+                                                                  @PageableDefault(size = 10, sort = "fechaCreacion")
+                                                                  Pageable paginacion) {
+
+        return ResponseEntity.ok(topicoService.listarTopicosPorNombreCurso(nombreCurso, paginacion));
     }
 
 }

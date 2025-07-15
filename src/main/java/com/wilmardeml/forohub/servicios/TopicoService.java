@@ -3,11 +3,14 @@ package com.wilmardeml.forohub.servicios;
 import com.wilmardeml.forohub.infra.excepciones.ValidacionException;
 import com.wilmardeml.forohub.modelos.dtos.DatosDetalleTopico;
 import com.wilmardeml.forohub.modelos.dtos.DatosRegistroTopico;
+import com.wilmardeml.forohub.modelos.dtos.DatosTopico;
 import com.wilmardeml.forohub.modelos.entidades.Topico;
 import com.wilmardeml.forohub.repositorios.CursoRepository;
 import com.wilmardeml.forohub.repositorios.TopicoRepository;
 import com.wilmardeml.forohub.repositorios.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -40,5 +43,13 @@ public class TopicoService {
                 new ArrayList<>()
         );
         return new DatosDetalleTopico(topicoRepository.save(topico));
+    }
+
+    public Page<DatosTopico> listarTopicos(Pageable paginacion) {
+        return topicoRepository.findAll(paginacion).map(DatosTopico::new);
+    }
+
+    public Page<DatosTopico> listarTopicosPorNombreCurso(String nombreCurso, Pageable paginacion) {
+        return topicoRepository.findByCursoNombre(nombreCurso, paginacion).map(DatosTopico::new);
     }
 }
