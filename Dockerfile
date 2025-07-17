@@ -4,6 +4,9 @@ FROM openjdk:24-jdk-slim
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /forohub
 
+# Descarga dependencias y construye el JAR
+RUN mvn clean package -DskipTests
+
 # Copia el archivo JAR de tu aplicación al contenedor
 COPY target/*.jar forohub-0.0.1.jar
 
