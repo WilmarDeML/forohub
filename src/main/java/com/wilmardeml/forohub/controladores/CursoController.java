@@ -3,6 +3,7 @@ package com.wilmardeml.forohub.controladores;
 import com.wilmardeml.forohub.modelos.dtos.DatosDetalleCurso;
 import com.wilmardeml.forohub.modelos.dtos.DatosRegistroCurso;
 import com.wilmardeml.forohub.servicios.CursoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
+@SecurityRequirement(name = "bearer-key")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("cursos")

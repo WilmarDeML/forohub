@@ -4,6 +4,7 @@ import com.wilmardeml.forohub.modelos.dtos.DatosDetalleTopico;
 import com.wilmardeml.forohub.modelos.dtos.DatosRegistroTopico;
 import com.wilmardeml.forohub.modelos.dtos.DatosTopico;
 import com.wilmardeml.forohub.servicios.TopicoService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
+@SecurityRequirement(name = "bearer-key")
 @RestController
 @RequestMapping("topicos")
 public class TopicoController {
