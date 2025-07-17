@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: api-forohub
+    buildCommand: ./mvnw clean install
+    startCommand: java -jar target/forohub-0.0.1.jar
+    envVars:
+      - key: PORT
+        value: "8080"
+    disk:
+      name: render-disk
+      mountPath: /forohub
+      sizeMB: 512
