@@ -24,4 +24,4 @@ ENV PORT=8080
 EXPOSE $PORT
 
 # Comando de arranque
-ENTRYPOINT ["java", "-jar", "forohub.jar"]
+ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-jar", "forohub.jar"]
