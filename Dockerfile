@@ -1,5 +1,5 @@
 # ===== ETAPA DE CONSTRUCCIÓN =====
-FROM maven:3.9-sapmachine-24 as builder
+FROM maven:3.9.10-sapmachine-24 as builder
 
 WORKDIR /forohub
 COPY pom.xml .
@@ -9,7 +9,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # ===== ETAPA DE EJECUCIÓN =====
-FROM eclipse-temurin:24-jre-jammy
+FROM openjdk:24-jdk-slim
 
 WORKDIR /forohub
 
