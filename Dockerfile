@@ -1,5 +1,5 @@
 # Usa una imagen base de eclipse-temurin 24
-FROM maven:3.9.10-sapmachine-24 as builder
+FROM maven:3.9.10-sapmachine-24
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /forohub
