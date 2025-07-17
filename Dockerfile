@@ -1,5 +1,5 @@
-# Usa una imagen base de OpenJDK 24
-FROM openjdk:24-jdk-slim
+# Usa una imagen base de eclipse-temurin 24
+FROM eclipse-temurin:24-jdk
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /forohub
