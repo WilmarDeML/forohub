@@ -10,7 +10,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Copia el archivo JAR de tu aplicación al contenedor
-COPY --from=builder /forohub/target/*.jar forohub-0.0.1.jar
+COPY /forohub/target/*.jar forohub-0.0.1.jar
 
 # Expone el puerto en el que tu aplicación escucha (ajusta según tu configuración)
 EXPOSE 8080
