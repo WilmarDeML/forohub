@@ -1,19 +1,27 @@
-# Usa una imagen base de eclipse-temurin 24
-FROM maven:3.9.10-sapmachine-24
+# ===== ETAPA DE CONSTRUCCIÓN =====
+FROM maven:3.9-sapmachine-24 as builder
 
-# Establece el directorio de trabajo dentro del contenedor
 WORKDIR /forohub
 COPY pom.xml .
 COPY src ./src
 
-# Descarga dependencias y construye el JAR
+# Cachea dependencias y construye el JAR
 RUN mvn clean package -DskipTests
 
-# Copia el archivo JAR de tu aplicación al contenedor
-COPY /forohub/target/*.jar forohub-0.0.1.jar
+# ===== ETAPA DE EJECUCIÓN =====
+FROM eclipse-temurin:24-jre-jammy
 
-# Expone el puerto en el que tu aplicación escucha (ajusta según tu configuración)
-EXPOSE 8080
+WORKDIR /forohub
 
-# Comando para ejecutar la aplicación
-ENTRYPOINT ["java", "-jar", "forohub-0.0.1.jar"]
+# Copia SOLO el JAR desde la etapa builder
+COPY --from=builder /forohub/target/*.jar forohub.jar
+
+# Asegura permisos (opcional pero recomendado)
+RUN chmod +x forohub.jar
+
+# Variables configurables
+ENV PORT=8080
+EXPOSE $PORT
+
+# Comando de arranque
+ENTRYPOINT ["java", "-jar", "forohub.jar"]
