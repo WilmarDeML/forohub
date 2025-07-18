@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GestorErrores {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<?> error404() {
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<?> error404(EntityNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getLocalizedMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
