@@ -21,6 +21,7 @@ Forohub es una API REST desarrollada en Java con Spring Boot, diseñada para la 
   - [Usuarios](#usuarios-no-requieren-autenticación-jwt)
   - [Tópicos](#tópicos-requieren-autenticación-jwt-rol-registrado)
   - [Cursos](#cursos-requieren-autenticación-jwt-rol-admin)
+  - [Respuestas](#respuestas-requieren-autenticación-jwt-rol-registrado)
 - [Seguridad](#-seguridad)
 - [Documentación](#-documentación)
 - [Características futuras](#-características-futuras)
@@ -31,11 +32,13 @@ Forohub es una API REST desarrollada en Java con Spring Boot, diseñada para la 
 - [Contacto](#-contacto)
 - [Autores](#-autores)
 - [Licencia](#-licencia)
+- [Dedicatoria](#-dedicatoria)
 
 ## 🚀 Características
 - Creación, actualización y eliminación de tópicos.
 - Creación de usuarios.
 - Creación de cursos.
+- Cración y actualización de respuestas.
 - Autenticación y autorización mediante JWT.
 - Validación de datos de entrada.
 - Documentación de la API con Swagger.
@@ -113,9 +116,17 @@ Puedes probar la API utilizando Postman, [Hoppscotch](hoppscotch.io) o cualquier
   - Respuesta: Sin contenido, pero con un código de estado 204 (No Content) si la eliminación fue exitosa.
 
 ### Cursos requieren autenticación JWT rol 'admin'.
-- `POST /v1/api/cursos`: Crear un nuevo curso.
+- `POST /cursos`: Crear un nuevo curso.
   - Requiere un objeto JSON con los campos `nombre` y `categoria`.
   - Respuesta: Un objeto JSON con el curso creado.
+
+### Respuestas requieren autenticación JWT rol 'registrado'.
+- `POST /respuestas`: Crear una nueva respuesta para un tópico.
+  - Requiere un objeto JSON con los campos `mensaje`, `autorId`, `topicoId` y `solucion` (opcional).
+  - Respuesta: Un objeto JSON con la respuesta creada.
+- `PUT /respuestas/{id}`: Actualizar una respuesta por ID.
+  - Requiere un objeto JSON con los campos `mensaje`, `autorId`, `topicoId` y `solucion` (opcional).
+  - Respuesta: Un objeto JSON con la respuesta actualizada.
 
 ## 🔒 Seguridad
 La API utiliza JWT para la autenticación y autorización. Los usuarios deben iniciar sesión para obtener un token JWT, que debe incluirse en los encabezados de las solicitudes que requieran autenticación.
@@ -133,12 +144,12 @@ La documentación de la API está disponible en Swagger. Una vez que la aplicaci
     ```
 
 ## 🚀 Características Futuras
-- Implementación de los endpoints de gestión de cursos.
-- Implementación de los endpoints de gestión de respuestas.
+- Completar los cruds de usuarios, roles, cursos y respuestas.
 - Mejora de la gestión de errores y excepciones.
 - Integración con servicios externos para notificaciones.
 - Implementación de un sistema de búsqueda avanzada.
 - Soporte para múltiples idiomas.
+- Mejorar la documentación de la API.
 
 ## 🤝 Contribución
 Si deseas contribuir al proyecto, sigue estos pasos:
@@ -213,3 +224,7 @@ Si tienes alguna pregunta o sugerencia, no dudes en contactarme a través de los
 
 ## 📜 Licencia
 Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+
+
+## 📝 Dedicatoria
+Este proyecto está dedicado a mi familia, amigos y a toda la comunidad Alura latam que han estado en este camino de aprendizaje como desarrollador backend. Gracias por su amor, acompañamiento y apoyo incondicional; especialmente a Dios MelquisedecLisbet.
